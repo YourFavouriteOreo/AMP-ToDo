@@ -1,21 +1,23 @@
 const express = require('express');
+const mongoose = require('mongoose')
 const bodyParser = require('body-parser');
+const todoRoutes = require('./api/routes/todo');
 
-const app = express();
-const port = process.env.PORT || 5000;
+mongoose.connect('mongodb://localhost:27017',(err)=> {
+    if(err){
+        console.log(err);
+    }
+    else {
+        console.log("Connected to Mongo DB");
+        const app = express();
+        const port = process.env.PORT || 5000;
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+        app.use(bodyParser.json());
+        app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/api/hello', (req, res) => {
-  res.send({ express: 'Hello From Express' });
+        app.use('/api/todos',todoRoutes)
+
+
+        app.listen(port, () => console.log(`Listening on port ${port}`));
+    }
 });
-
-app.post('/api/world', (req, res) => {
-  console.log(req.body);
-  res.send(
-    `I received your POST request. This is what you sent me: ${req.body.post}`,
-  );
-});
-
-app.listen(port, () => console.log(`Listening on port ${port}`));
