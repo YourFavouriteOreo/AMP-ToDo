@@ -1,5 +1,5 @@
 {
-  "name": "AMP Todo",
+  "name": "AMP_Todo",
   "version": "1.0.0",
   "scripts": {
     "client": "cd client && npm run start",
