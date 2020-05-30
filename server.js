@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser');
 const todoRoutes = require('./api/routes/todo');
+const userRoutes = require('./api/routes/user');
 
 mongoose.connect('mongodb://localhost:27017',(err)=> {
     if(err){
@@ -16,6 +17,7 @@ mongoose.connect('mongodb://localhost:27017',(err)=> {
         app.use(bodyParser.urlencoded({ extended: true }));
 
         app.use('/api/todos',todoRoutes)
+        app.use('/api/users',userRoutes)
 
 
         app.listen(port, () => console.log(`Listening on port ${port}`));
