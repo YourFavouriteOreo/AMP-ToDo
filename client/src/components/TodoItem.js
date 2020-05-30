@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ToDoItem = ({text,isComplete}) =>{
+const ToDoItem = ({text,isComplete,editFunction}) =>{
     return (
         <div className="flex flex-row text-center font-bold">
         <div className="w-2/12 mr-2 leading-tight text-right">
@@ -10,7 +10,10 @@ const ToDoItem = ({text,isComplete}) =>{
     <span >{text}</span>
         </div>
         <div className="w-2/12 ml-5">
-        <button className="text-left text-blue-400 cursor-pointer">Edit</button>
+        <button 
+        onClick={editFunction}
+        className="text-left text-blue-400 cursor-pointer">
+            Edit</button>
         </div>
         </div>
     );

@@ -3,11 +3,11 @@ const router = express.Router();
 const mongoose = require("mongoose")
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
-
+const cors = require('cors')
 const User = require('../models/user')
 
 router.post('/signup', (req, res, next) => {
-    console.log(req.body)
+    
     User.find({
             email: req.body.email
         })
@@ -49,6 +49,9 @@ router.post('/signup', (req, res, next) => {
 })
 
 router.post('/login', (req, res, next) => {
+    console.log(req.params)
+    console.log(req.body)
+    console.log(req.params)
     User.findOne({
             email: req.body.email
         })
