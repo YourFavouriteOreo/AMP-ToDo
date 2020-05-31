@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { ToDoContext } from '../contexts/ToDoContext';
+import { AuthContext } from '../contexts/AuthContext';
 
-const ToDoItem = ({text,isComplete,editFunction}) =>{
+
+
+const ToDoItem = ({todo,editFunction}) =>{
+    const {token} = useContext(AuthContext)
+    const {toggleCheckmark} = useContext(ToDoContext)
     return (
         <div className="flex flex-row text-center font-bold">
         <div className="w-2/12 mr-2 leading-tight text-right">
-        <input  type="checkbox" defaultChecked={isComplete} />
+        <input  type="checkbox" onClick={(evt)=>{toggleCheckmark(evt.target.value,todo,token)}} value={todo.isComplete} defaultChecked={todo.isComplete} />
         </div>
         <div className="w-8/12 text-base">
-    <span >{text}</span>
+    <span >{todo.text}</span>
         </div>
         <div className="w-2/12 ml-5">
         <button 
