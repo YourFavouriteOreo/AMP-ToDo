@@ -21,18 +21,18 @@ class ToDoContextProvider extends Component {
     });
   };
 
-  addNewToDo = (e, token) => {
+  addNewToDo = (e, token,folderID) => {
     // Add New ToDo item and clear content of new todo item in form
     Axios({
       method: "post",
       headers: {
         Authorization: `Bearer ${token}`,
       },
-      data: qs.stringify({ text: this.state.newToDo, isComplete: false }),
+      data: qs.stringify({ text: this.state.newToDo, isComplete: false,folderID:folderID}),
       url: "http://localhost:5000/api/todos/",
     }).then((response) => {
-      var clone = this.state.todos.slice(0);
-      clone.push({ text: this.state.newToDo, isComplete: false });
+      var clone = this.state.todos;
+      clone.push(response.data);
       this.setState({
         todos: clone,
         newToDo: "",
@@ -41,7 +41,6 @@ class ToDoContextProvider extends Component {
   };
 
   toggleCheckmark = (value,todo,token)=>{
-      value = !value
     Axios({
         method: "PATCH",
         headers: {
@@ -55,20 +54,27 @@ class ToDoContextProvider extends Component {
         filteredArray.push({_id:todo._id,text:todo.text,isComplete:value})
         this.setState({})
       })
+      .catch(err=>{
+          console.log(err)
+      })
   }
 
-  saveTodo = (text,token)=>{
+  saveTodo = (text,isComplete,token,todoID)=>{
     // Save ToDo Changes
 Axios({
       method: "PATCH",
       headers: {
         Authorization: `Bearer ${token}`,
       },
-      data: qs.stringify({ text: text, isComplete: this.state.currentEdit.isComplete }),
-      url: `http://localhost:5000/api/todos/${this.state.currentEdit._id}`,
+      data: qs.stringify({ text: text, isComplete: isComplete }),
+      url: `http://localhost:5000/api/todos/${todoID}`,
     }).then((response) => {
-      var filteredArray = this.state.todos.filter(todo=> todo!==this.state.currentEdit)
-      filteredArray.push({_id:this.state.currentEdit._id,text:text,isComplete:this.state.currentEdit.isComplete})
+      var filteredArray = this.state.todos.slice(0)
+      filteredArray.map(todo =>{
+        if (todo._id===todoID){
+          todo.text = text
+        }
+      })
       this.setState({
           todos:filteredArray
       })
@@ -76,16 +82,32 @@ Axios({
     })
   }
 
-  deleteTodo(token,text) {
+  deleteTodo=(token,text,todoID)=>{
     // Save ToDo Changes
     Axios({
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
       },
-      data: qs.stringify({ text: text, isComplete: this.state.currentEdit.isComplete }),
-      url: `http://localhost:5000/api/todos/${this.state.currentEdit._id}`,
-    }).then((response) => {});
+      url: `http://localhost:5000/api/todos/${todoID}`,
+    }).then((response) => {
+      var filteredArray = this.state.todos.filter(todo=>todo._id!==todoID)
+      this.setState({todos:filteredArray})
+      this.setCurrentEdit(null)
+    });
+  }
+
+  selectFolder = (folder)=>{
+      if (folder === null){
+        this.setState({
+            todos:null
+        })
+      }
+      else {
+        this.setState({
+            todos:folder.todos
+        })
+      }
   }
 
   fetchToDoList = async (token) => {
@@ -113,7 +135,8 @@ Axios({
           addNewToDo: this.addNewToDo,
           saveTodo: this.saveTodo,
           deleteTodo:this.deleteTodo,
-          toggleCheckmark:this.toggleCheckmark
+          toggleCheckmark:this.toggleCheckmark,
+          selectFolder: this.selectFolder
         }}
       >
         {this.props.children}

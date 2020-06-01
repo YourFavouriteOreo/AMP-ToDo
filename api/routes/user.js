@@ -20,7 +20,6 @@ router.post('/signup', (req, res, next) => {
             } else {
                 bcrypt.hash(req.body.password, 10, (err, hash) => {
                     if (err) {
-                        console.log(err)
                         return res.status(500).json({
                             error: err
                         })
@@ -49,9 +48,6 @@ router.post('/signup', (req, res, next) => {
 })
 
 router.post('/login', (req, res, next) => {
-    console.log(req.params)
-    console.log(req.body)
-    console.log(req.params)
     User.findOne({
             email: req.body.email
         })
@@ -76,8 +72,6 @@ router.post('/login', (req, res, next) => {
                                     expiresIn: "48h"
                                 }
                             )
-                            console.log(user._id);
-                            console.log(result)
                             return res.status(200).json({
                                 message: "Auth Successful",
                                 token:token,

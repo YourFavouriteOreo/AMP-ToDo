@@ -26,7 +26,7 @@ function cancelEdit (){
               <div className="flex flex-row mt-5">
               <button
                 className="shadow bg-green-500 hover:bg-green-700 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded transition-all duration-200"
-                onClick={()=>{saveTodo(text,token)}}
+                onClick={()=>{saveTodo(text,currentEdit.isComplete,token,currentEdit._id)}}
                 type="submit"
               >
                 Save
@@ -40,7 +40,7 @@ function cancelEdit (){
               </button>
               <button
                 className="shadow bg-red-500 hover:bg-red-700 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded transition-all duration-200"
-                onClick={deleteTodo}
+                onClick={()=>{deleteTodo(token,text,currentEdit._id)}}
                 type="submit"
               >
                 Delete

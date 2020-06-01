@@ -19,16 +19,16 @@ router.get("/",checkAuth,(req, res, next) => {
 });
 
 router.post("/",checkAuth, (req, res, next) => {
-    console.log(req.body);
-    if (req.body.text) {
+    if (req.body.name) {
       const newFolder = new Folder({
         _id: new mongoose.Types.ObjectId(),
-        name: req.body.text,
+        name: req.body.name,
         todo: [],
         owner: req.userData.id
       });
-      newFolder.save();
-      return res.status(200).json();
+      newFolder.save().then(result=>{
+          return res.status(200).json(result)
+      })
     } else {
       return res.status(500).json({ error: "Please provide folder text" });
     }
@@ -36,7 +36,6 @@ router.post("/",checkAuth, (req, res, next) => {
 
   router.patch("/:folderID",checkAuth, (req, res, next) => {
     const id = req.params.folderID;
-    console.log(req.body)
     if (req.body.text && req.body.isComplete) {
       Folder.findOne({ _id: id }).then((result) => {
         if (result) {
@@ -71,7 +70,9 @@ router.post("/",checkAuth, (req, res, next) => {
                   dataTodo.remove()
               });
             result.remove()
-        return res.status(200).json(result);
+            .then(result=>{
+                res.status(200).json(result)
+            })
           }
           else {
               return res.status(400).json({
