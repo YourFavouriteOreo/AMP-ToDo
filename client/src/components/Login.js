@@ -6,32 +6,10 @@ import qs from 'querystring'
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { token, setToken } = useContext(AuthContext);
+  const { setToken } = useContext(AuthContext);
 
   const fetchToken = (e) => {
     e.preventDefault();
-    var bodyFormData = new FormData();
-    bodyFormData.append('email',email)
-    console.log(email)
-    bodyFormData.append('password',password)
-    console.log(bodyFormData)
-    // axios({
-    //     method: 'post',
-    //     url: 'http://localhost:5000/api/users/login',
-    //     data: {
-    //         "email":email,
-    //         "password":password
-    //     },
-    //     headers: {'Content-Type': 'application/x-www-form-urlencoded' }
-    //     })
-    //     .then(function (response) {
-    //         //handle success
-    //         console.log(response);
-    //     })
-    //     .catch(function (response) {
-    //         //handle error
-    //         console.log(response);
-    //     });
     axios
         .post("http://localhost:5000/api/users/login",qs.stringify({
             "email":email,
@@ -40,8 +18,6 @@ const Login = () => {
         .then(res=> setToken(res.data.token))
         .catch(err=> console.log(err))
   };
-
-  console.log(token);
 
   return (
     <div className="max-w-full mx-auto vertical-middle h-screen flex">

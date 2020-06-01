@@ -10,14 +10,14 @@ const FolderItem = ({folder}) =>{
     const {setSelectedFolder,deleteFolder} = useContext(FolderContext)
     const {selectFolder} = useContext(ToDoContext)
     return (
-        <div className="flex flex-row text-center font-bold my-3 ">
+        <div className="flex flex-row text-center font-bold my-3 text-2xl ">
         <div className="w-2 mr-2 leading-tight text-left">
         <span>-</span>
         </div>
-        <div className="w-6/12 text-base ">
+        <div className="w-6/12 ">
     <span >{folder.name}</span>
         </div>
-        <div className="w-2/12 ml-5">
+        <div className="w-4/12 ml-5">
         <button 
         onClick={()=>{
             selectFolder(folder)

@@ -19,26 +19,32 @@ const ToDoList = () => {
     selectFolder
   } = useContext(ToDoContext);
 
+  const emptyMessage = (text)=>{
+    return (
+    <p className="text-gray-500 ml-12">{text}</p>
+    )
+  }
+
   while(folders == null) {
     fetchFolderList(token);
     return <div></div>;
   }
   if (todos===null){
     return (
-      <div className="max-w-lg my-auto w-6/12 mx-auto">
+      <div className="w-10/12 my-auto ml-10 md:max-w-3xl md:mx-auto ">
           <div className="my-5">
-            <h1 className="text-2xl font-bold leading-tight mb-5">
+            <h1 className="text-6xl font-bold leading-tight mb-5 md:text-4xl">
               Folders
             </h1>
             <div className="flex flex-col">
-            {folders.map((folder) => {
+            {folders.length>0?folders.map((folder) => {
                 return (
                   <FolderItem
                     key={folder._id}
                     folder={folder}
                   />
                 );
-              })}
+              }):emptyMessage("No folders available. Please create one below")}
             </div>
           </div>
           <form className="flex flex-row justify-center">
@@ -68,15 +74,15 @@ const ToDoList = () => {
       return <EditTodo/>;
     } else {
       return (
-        <div className="max-w-lg my-auto w-6/12 mx-auto">
+        <div className="my-auto w-10/12 ml-10 md:max-w-3xl md:mx-auto">
           <div className="my-5">
-            <h1 className="text-2xl font-bold leading-tight mb-5">
+            <h1 className="font-bold leading-tight mb-5 text-6xl md:text-4xl">
               <span className="text-blue-500 cursor-pointer" onClick={()=>{
                 selectFolder(null)
               }}>Folders</span> > {selectedFolder.name}
             </h1>
             <div className="flex flex-col">
-              {todos.map((todo) => {
+              {todos.length>0?todos.map((todo) => {
                 return (
                   <ToDoItem
                     key={todo._id}
@@ -86,7 +92,7 @@ const ToDoList = () => {
                     }}
                   />
                 );
-              })}
+              }):emptyMessage("No Todos Available. Please create one below")}
             </div>
           </div>
           <form className="flex flex-row justify-center">

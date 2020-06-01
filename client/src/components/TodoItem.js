@@ -8,11 +8,11 @@ const ToDoItem = ({todo,editFunction}) =>{
     const {token} = useContext(AuthContext)
     const {toggleCheckmark} = useContext(ToDoContext)
     return (
-        <div className="flex flex-row text-center font-bold">
+        <div className="flex flex-row text-center font-bold text-2xl my-4">
         <div className="w-2/12 mr-2 leading-tight text-right">
-        <input  type="checkbox" onClick={(evt)=>{toggleCheckmark(evt.target.checked,todo,token)}} value={todo.isComplete} defaultChecked={todo.isComplete} />
+        <input style={{transform:"scale(2)"}} type="checkbox" onClick={(evt)=>{toggleCheckmark(evt.target.checked,todo,token)}} value={todo.isComplete} defaultChecked={todo.isComplete} />
         </div>
-        <div className="w-8/12 text-base">
+        <div className="w-8/12">
     <span >{todo.text}</span>
         </div>
         <div className="w-2/12 ml-5">
