@@ -1,5 +1,31 @@
 # AMP-TODO
 
+## Requirements
+
+This application has been tested to run on :
+- Node version: v10.19.0
+- NPM version: 6.14.4
+- MongoDB version: 4.2.7
+- React version: 16.13.1
+
+## How to Run
+
+If you are using a distribution that supports the apt-get command, simply running the setup.sh script would install all dependencies and run the application.
+
+However, if you are on Mac or Windows. Running under the assumption that you have Node, NPM and MongoDB installed please run the command below in the root folder to install all dependencies
+```
+npm run complete-install 
+```
+Then run the next command in the root folder to run the application
+```
+npm run dev
+```
+
+The application automatically creates a default account for usage with the following details:
+
+- email: randomemail@gmail.com
+- password: test
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -20,3 +46,7 @@ Open [http://localhost:5000](http://localhost:5000) to view it in the browser.
 
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
+
+### `npm run complete-install`
+
+Download and install all npm dependencies

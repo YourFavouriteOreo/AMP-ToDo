@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "client": "cd client && npm run start",
+    "complete-install": "npm install && cd client && npm install",
     "server": "nodemon server.js",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
   },

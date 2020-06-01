@@ -70,7 +70,7 @@ Axios({
       url: `http://localhost:5000/api/todos/${todoID}`,
     }).then((response) => {
       var filteredArray = this.state.todos.slice(0)
-      filteredArray.map(todo =>{
+      filteredArray.forEach(todo =>{
         if (todo._id===todoID){
           todo.text = text
         }
