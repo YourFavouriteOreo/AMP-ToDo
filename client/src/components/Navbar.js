@@ -5,6 +5,7 @@ const Navbar = () => {
 
     const { setToken } = useContext(AuthContext);
     const logout = () => {
+        // Remove generated token effectively logging out the user
         localStorage.removeItem("token")
         setToken("")
     }

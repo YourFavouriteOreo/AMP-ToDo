@@ -20,6 +20,7 @@ const ToDoList = () => {
   } = useContext(ToDoContext);
 
   const emptyMessage = (text)=>{
+    // Generate message to show lack of folders or todos
     return (
     <p className="text-gray-500 ml-12">{text}</p>
     )

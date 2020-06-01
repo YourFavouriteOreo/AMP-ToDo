@@ -11,6 +11,7 @@ class ToDoContextProvider extends Component {
   };
 
   setCurrentEdit = (todo) => {
+    // Enable edit mode to display edit screen
     this.setState({ currentEdit: todo });
   };
 
@@ -41,6 +42,7 @@ class ToDoContextProvider extends Component {
   };
 
   toggleCheckmark = (value,todo,token)=>{
+    // Save Checkmark on Toggle
     Axios({
         method: "PATCH",
         headers: {
@@ -83,7 +85,7 @@ Axios({
   }
 
   deleteTodo=(token,text,todoID)=>{
-    // Save ToDo Changes
+    // Delete ToDo
     Axios({
       method: "DELETE",
       headers: {
@@ -98,6 +100,7 @@ Axios({
   }
 
   selectFolder = (folder)=>{
+    // Select Todo group to show
       if (folder === null){
         this.setState({
             todos:null
@@ -109,20 +112,6 @@ Axios({
         })
       }
   }
-
-  fetchToDoList = async (token) => {
-    Axios({
-      method: "get",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      url: "http://localhost:5000/api/todos/",
-    }).then((response) => {
-      this.setState({
-        todos: response.data,
-      });
-    });
-  };
 
   render() {
     return (

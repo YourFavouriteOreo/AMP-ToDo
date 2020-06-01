@@ -4,10 +4,6 @@ import { ToDoContext } from '../contexts/ToDoContext';
 
 
 const EditTodo = () => {
-
-function cancelEdit (){
-    setCurrentEdit(null)
-}
     const {currentEdit,setCurrentEdit,saveTodo,deleteTodo} = useContext(ToDoContext);
     const  {token} = useContext(AuthContext);
     const [text,setText] = useState(currentEdit.text)
@@ -33,7 +29,7 @@ function cancelEdit (){
               </button>
               <button
                 className="shadow bg-gray-500 hover:bg-gray-700 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded transition-all duration-200 mx-5"
-                onClick={cancelEdit}
+                onClick={()=>{setCurrentEdit(null)}}
                 type="submit"
               >
                 Cancel

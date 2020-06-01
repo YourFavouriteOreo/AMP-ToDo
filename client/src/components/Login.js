@@ -9,6 +9,7 @@ const Login = () => {
   const { setToken } = useContext(AuthContext);
 
   const fetchToken = (e) => {
+    // Login user and save token on device
     e.preventDefault();
     axios
         .post("http://localhost:5000/api/users/login",qs.stringify({

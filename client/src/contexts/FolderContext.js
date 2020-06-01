@@ -12,12 +12,14 @@ class FolderContextProvider extends Component {
   };
 
   onChangeNewFolder = (e) => {
+    // update newFolder state variable in order to create new folders
       this.setState({
           newFolder:e.target.value
       })
   }
 
   setSelectedFolder = (folder) => {
+    // Set selected folder for use in render
       this.setState({
           selectedFolder:folder
       })
@@ -42,7 +44,7 @@ class FolderContextProvider extends Component {
   }
 
   addNewFolder = (token) => {
-    // Add New ToDo item and clear content of new todo item in form
+    // Add New FOlder item and clear content of new folder in form
     Axios({
       method: "post",
       headers: {
@@ -61,6 +63,7 @@ class FolderContextProvider extends Component {
   };
   
   fetchFolderList = async (token) => {
+    // Get all folders and todos that belong to the user
     Axios({
       method: "get",
       headers: {
