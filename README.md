@@ -12,11 +12,11 @@ This application has been tested to run on :
 
 If you are using a distribution that supports the apt-get command, simply running the setup.sh script would install all dependencies and run the application.
 
-However, if you are on Mac or Windows. Running under the assumption that you have Node, NPM and MongoDB installed please run the command below in the root folder to install all dependencies
+However, if you are on Mac or Windows. Running under the assumption that you have Node, NPM and MongoDB installed please run the command below in the root folder to install all dependencies and run the application
 ```
-npm run complete-install 
+npm run complete-install-run 
 ```
-Then run the next command in the root folder to run the application
+alternatively run the next command in the root folder to run the application if all dependencies have been installed
 ```
 npm run dev
 ```

@@ -7,7 +7,7 @@ class AuthContextProvider extends Component {
         token: ""
     }
     componentDidMount= ()=>{
-        var retrievedToken = localStorage.getItem("token")
+        var retrievedToken = localStorage.getItem("uniqueToDoAuthToken")
         if (!retrievedToken){
             console.log("token not found")
         }
@@ -16,7 +16,7 @@ class AuthContextProvider extends Component {
         }
     }
     setToken = (newToken) => {
-        localStorage.setItem("token",newToken)
+        localStorage.setItem("uniqueToDoAuthToken",newToken)
         this.setState({token: newToken})
     }
     render() { 

@@ -7,10 +7,4 @@ if [ "" = "$PKG_OK" ]; then
 fi
 echo Node version: `node -v`
 echo NPM version: `npm -v`
-
-wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | sudo apt-key add -
-npm install
-cd client
-npm install
-cd ..
-npm run dev
+npm run complete-install-run
